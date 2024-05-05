@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   vprodb:
-    build: 
+    build:
       context: ./Docker-files/db
     image: ratipk96/vprofiledb
     container_name: vprodb
@@ -27,17 +27,19 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
 
   vproapp:
-    build: 
+    build:
       context: ./Docker-files/app
+      args:
+        GH_SSH_PRIVATE_KEY: ${GH_SSH_PRIVATE_KEY}
     image: ratipk96/vprofileapp
     container_name: vproapp
     ports:
       - "8080:8080"
     volumes:
       - vproappdata:/usr/local/tomcat/webapps
-    
+
   vproweb:
-    build: 
+    build:
       context: ./Docker-files/web
     image: ratipk96/vprofileweb
     container_name: vproweb
@@ -47,4 +49,3 @@ services:
 volumes:
    vprodbdata: {}
    vproappdata: {}
-  

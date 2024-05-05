@@ -7,5 +7,12 @@ docker run -it --rm image_name /bin/sh
 #Override the entrypoint and command command is `-c "echo Hello, World!"`
 docker run --entrypoint /bin/sh image_name -c "echo Hello, World!"
 
+#Docker Build
+docker build -t image:tag -f Dockerfilepath DockerBuildContext
+docker build -t test:v2 --build-arg GH_SSH_PRIVATE_KEY="$(cat ~/.ssh/rati098github)"  Docker-files/app/
+#docker compose 
+export GH_SSH_PRIVATE_KEY=$(cat ~/.ssh/rati098github)
+
+
 # Clean ALL 
 docker system prune -a
