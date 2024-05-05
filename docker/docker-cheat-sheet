@@ -1,2 +1,11 @@
 # Run docker command priviledge
 sudo usermod -aG docker vagrant
+
+#Take cell from image by temporarily running a container 
+docker run -it --rm image_name /bin/sh
+
+#Override the entrypoint and command command is `-c "echo Hello, World!"`
+docker run --entrypoint /bin/sh image_name -c "echo Hello, World!"
+
+# Clean ALL 
+docker system prune -a
