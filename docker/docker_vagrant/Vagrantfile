@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder "sync/opt", "/opt"
+  # Define the VM configuration
+  config.vm.define "dockervm" do |node|
+    # Set the box (OS image) to use
+    node.vm.box = "bento/ubuntu-20.04"
+    
+    # Set private IP
+    node.vm.network "private_network", ip: "192.168.56.5"
+    
+    # Set hostname
+    node.vm.hostname = "dockervm"
+    
+    # Provider-specific configuration
+    node.vm.provider "virtualbox" do |vb|
+      vb.memory = "3072" # Customize memory size if needed
+      vb.cpus = 3 # Customize CPU cores if needed
+    end
+    
+    # Provisioning
+    node.vm.provision "shell", path: "provision.sh"
+  end
+end

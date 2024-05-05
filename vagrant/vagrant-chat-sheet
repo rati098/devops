@@ -1,0 +1,22 @@
+# initialise a Vagrantfile
+vagrant init 
+
+vagrant global-status --prune
+
+# Local status (in the fodler)
+vagrant status
+
+# Start a VM (download box first time)
+vagrant up
+
+# Coonect 
+vagrant ssh dockervm
+
+# Reload 
+vagrant reload dockervm
+
+#Stop 
+vagrant halt dockervm
+
+#Destroy 
+vagrant destroy dockervm
