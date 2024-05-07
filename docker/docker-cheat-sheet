@@ -13,6 +13,8 @@ docker build -t test:v2 --build-arg GH_SSH_PRIVATE_KEY="$(cat ~/.ssh/rati098gith
 #docker compose 
 export GH_SSH_PRIVATE_KEY=$(cat ~/.ssh/rati098github)
 
+#Stop all running containers
+docker ps -q | xargs docker stop
 
 # Clean ALL 
 docker system prune -a
