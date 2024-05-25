@@ -1,0 +1,29 @@
+# Vagrantfile
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64" # Ubuntu 20.04 LTS
+  config.vm.network "public_network"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    # Update apt
+    sudo apt update
+    
+    # Install VirtualBox
+    sudo apt install -y virtualbox
+
+    # Install kubectl
+    sudo apt-get install -y apt-transport-https
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubectl
+
+    # Install Minikube
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  SHELL
+end

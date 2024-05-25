@@ -1,0 +1,4 @@
+minikube start 
+kubectl get nodes
+minikube stop
+minikube delete
